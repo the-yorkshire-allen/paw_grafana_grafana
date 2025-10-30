@@ -1,0 +1,116 @@
+{
+  "puppet_task_version": 1,
+  "supports_noop": false,
+  "description": "Execute the entire Ansible role imperatively",
+  "input_method": "environment",
+  "parameters": {
+    "tempo_http_api_prefix": {
+      "description": "",
+      "type": "Optional[String]"
+    },
+    "tempo_report_usage": {
+      "description": "Ansible role variable (default: true)",
+      "type": "Optional[Boolean]"
+    },
+    "tempo_multitenancy_enabled": {
+      "description": "",
+      "type": "Optional[Boolean]"
+    },
+    "tempo_version": {
+      "description": "defaults file for tempo",
+      "type": "Optional[String]"
+    },
+    "tempo_uninstall": {
+      "description": "",
+      "type": "Optional[Boolean]"
+    },
+    "du__tempo_arch": {
+      "description": "Ansible role variable (default: {{ arch_mapping[ansible_facts['architecture']] | default('amd64') }})",
+      "type": "Optional[String]"
+    },
+    "tempo_download_url_rpm": {
+      "description": "Ansible role variable (default: https://github.com/grafana/tempo/releases/download/v{{ tempo_version }}/tempo_{{ tempo_version }}_linux_{{ __tempo_arch }}.rpm)",
+      "type": "Optional[String]"
+    },
+    "tempo_download_url_deb": {
+      "description": "Ansible role variable (default: https://github.com/grafana/tempo/releases/download/v{{ tempo_version }}/tempo_{{ tempo_version }}_linux_{{ __tempo_arch }}.deb)",
+      "type": "Optional[String]"
+    },
+    "tempo_working_path": {
+      "description": "Ansible role variable (default: /var/lib/tempo)",
+      "type": "Optional[String]"
+    },
+    "tempo_http_listen_port": {
+      "description": "Ansible role variable (default: 3200)",
+      "type": "Optional[Integer]"
+    },
+    "tempo_http_listen_address": {
+      "description": "Ansible role variable (default: 0.0.0.0)",
+      "type": "Optional[String]"
+    },
+    "tempo_log_level": {
+      "description": "Ansible role variable (default: warn)",
+      "type": "Optional[String]"
+    },
+    "tempo_server": {
+      "description": "Default Variables from /etc/tempo/config.yml",
+      "type": "Optional[Hash]"
+    },
+    "tempo_query_frontend": {
+      "description": "Ansible role variable (default: {\"search\"=>{\"duration_slo\"=>\"5s\", \"throughput_bytes_slo\"=>1073741824.0, \"metadata_slo\"=>{\"duration_slo\"=>\"5s\", \"throughput_bytes_slo\"=>1073741824.0}}, \"trace_by_id\"=>{\"duration_slo\"=>\"5s\"}})",
+      "type": "Optional[Hash]"
+    },
+    "tempo_distributor": {
+      "description": "Ansible role variable (default: {\"receivers\"=>{\"otlp\"=>{\"protocols\"=>{\"grpc\"=>{\"endpoint\"=>\"{{ tempo_http_listen_address }}:4317\"}}}}})",
+      "type": "Optional[Hash]"
+    },
+    "tempo_metrics_generator": {
+      "description": "Ansible role variable (default: {\"registry\"=>{\"external_labels\"=>{\"source\"=>\"tempo\", \"cluster\"=>\"docker-compose\"}}, \"storage\"=>{\"path\"=>\"{{ tempo_working_path }}/generator/wal\", \"remote_write\"=>[{\"url\"=>\"http://prometheus:9090/api/v1/write\", \"send_exemplars\"=>true}]}, \"traces_storage\"=>{\"path\"=>\"{{ tempo_working_path }}/generator/traces\"}})",
+      "type": "Optional[Hash]"
+    },
+    "tempo_storage": {
+      "description": "Ansible role variable (default: {\"trace\"=>{\"backend\"=>\"local\", \"wal\"=>{\"path\"=>\"{{ tempo_working_path }}/wal\"}, \"local\"=>{\"path\"=>\"{{ tempo_working_path }}/blocks\"}}})",
+      "type": "Optional[Hash]"
+    },
+    "tempo_overrides": {
+      "description": "Ansible role variable (default: {\"defaults\"=>{\"metrics_generator\"=>{\"processors\"=>[\"service-graphs\", \"span-metrics\", \"local-blocks\"], \"generate_native_histograms\"=>\"both\"}}})",
+      "type": "Optional[Hash]"
+    },
+    "par_connection": {
+      "description": "Ansible connection type (e.g., 'local', 'ssh', 'winrm')",
+      "type": "Optional[String]"
+    },
+    "par_timeout": {
+      "description": "Playbook execution timeout in seconds",
+      "type": "Optional[Integer]"
+    },
+    "par_environment": {
+      "description": "Additional environment variables for ansible-playbook",
+      "type": "Optional[Hash]"
+    },
+    "par_working_directory": {
+      "description": "Working directory for ansible-playbook execution",
+      "type": "Optional[String]"
+    },
+    "par_extra_flags": {
+      "description": "Additional flags to pass to ansible-playbook (e.g., ['-v', '--check'])",
+      "type": "Optional[Array[String]]"
+    }
+  },
+  "implementations": [
+    {
+      "name": "tempo.sh",
+      "requirements": [
+        "shell"
+      ],
+      "input_method": "environment"
+    },
+    {
+      "name": "tempo.ps1",
+      "requirements": [
+        "powershell"
+      ],
+      "input_method": "environment"
+    }
+  ]
+}

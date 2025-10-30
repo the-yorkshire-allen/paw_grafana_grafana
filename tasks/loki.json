@@ -1,0 +1,116 @@
+{
+  "puppet_task_version": 1,
+  "supports_noop": false,
+  "description": "Execute the entire Ansible role imperatively",
+  "input_method": "environment",
+  "parameters": {
+    "loki_target": {
+      "description": "Ansible role variable (default: all)",
+      "type": "Optional[String]"
+    },
+    "loki_auth_enabled": {
+      "description": "Default Variables for /etc/loki/config.yml",
+      "type": "Optional[Boolean]"
+    },
+    "loki_ballast_bytes": {
+      "description": "Ansible role variable (default: 0)",
+      "type": "Optional[Integer]"
+    },
+    "loki_version": {
+      "description": "defaults file for loki",
+      "type": "Optional[String]"
+    },
+    "loki_uninstall": {
+      "description": "",
+      "type": "Optional[Boolean]"
+    },
+    "loki_http_listen_port": {
+      "description": "Ansible role variable (default: 3100)",
+      "type": "Optional[Integer]"
+    },
+    "loki_http_listen_address": {
+      "description": "Ansible role variable (default: 0.0.0.0)",
+      "type": "Optional[String]"
+    },
+    "loki_expose_port": {
+      "description": "",
+      "type": "Optional[Boolean]"
+    },
+    "loki_download_url_rpm": {
+      "description": "Ansible role variable (default: https://github.com/grafana/loki/releases/download/v{{ loki_version }}/loki-{{ loki_version }}.{{ __loki_arch }}.rpm)",
+      "type": "Optional[String]"
+    },
+    "loki_download_url_deb": {
+      "description": "Ansible role variable (default: https://github.com/grafana/loki/releases/download/v{{ loki_version }}/loki_{{ loki_version }}_{{ __loki_arch }}.deb)",
+      "type": "Optional[String]"
+    },
+    "loki_working_path": {
+      "description": "Ansible role variable (default: /var/lib/loki)",
+      "type": "Optional[String]"
+    },
+    "loki_ruler_alert_path": {
+      "description": "Ansible role variable (default: {{ loki_working_path }}/rules/fake)",
+      "type": "Optional[String]"
+    },
+    "loki_server": {
+      "description": "Ansible role variable (default: {\"http_listen_address\"=>\"{{ loki_http_listen_address }}\", \"http_listen_port\"=>\"{{ loki_http_listen_port }}\", \"grpc_listen_port\"=>9096})",
+      "type": "Optional[Hash]"
+    },
+    "loki_common": {
+      "description": "Ansible role variable (default: {\"instance_addr\"=>\"127.0.0.1\", \"path_prefix\"=>\"{{ loki_working_path }}\", \"storage\"=>{\"filesystem\"=>{\"chunks_directory\"=>\"{{ loki_working_path }}/chunks\", \"rules_directory\"=>\"{{ loki_working_path }}/rules\"}}, \"replication_factor\"=>1, \"ring\"=>{\"kvstore\"=>{\"store\"=>\"inmemory\"}}})",
+      "type": "Optional[Hash]"
+    },
+    "loki_query_range": {
+      "description": "Ansible role variable (default: {\"results_cache\"=>{\"cache\"=>{\"embedded_cache\"=>{\"enabled\"=>true, \"max_size_mb\"=>100}}}})",
+      "type": "Optional[Hash]"
+    },
+    "loki_schema_config": {
+      "description": "Ansible role variable (default: {\"configs\"=>[{\"from\"=>#<Date: 2020-10-24 ((2459147j,0s,0n),+0s,-Infj)>, \"store\"=>\"tsdb\", \"object_store\"=>\"filesystem\", \"schema\"=>\"v13\", \"index\"=>{\"prefix\"=>\"index_\", \"period\"=>\"24h\"}}]})",
+      "type": "Optional[Hash]"
+    },
+    "loki_ruler": {
+      "description": "Ansible role variable (default: {\"storage\"=>{\"type\"=>\"local\", \"local\"=>{\"directory\"=>\"{{ loki_working_path }}/rules\"}}, \"rule_path\"=>\"{{ loki_working_path }}/rules_tmp\", \"ring\"=>{\"kvstore\"=>{\"store\"=>\"inmemory\"}}, \"enable_api\"=>true, \"enable_alertmanager_v2\"=>true, \"alertmanager_url\"=>\"http://localhost:9093\"})",
+      "type": "Optional[Hash]"
+    },
+    "loki_analytics": {
+      "description": "Ansible role variable (default: {\"reporting_enabled\"=>false})",
+      "type": "Optional[Hash]"
+    },
+    "par_connection": {
+      "description": "Ansible connection type (e.g., 'local', 'ssh', 'winrm')",
+      "type": "Optional[String]"
+    },
+    "par_timeout": {
+      "description": "Playbook execution timeout in seconds",
+      "type": "Optional[Integer]"
+    },
+    "par_environment": {
+      "description": "Additional environment variables for ansible-playbook",
+      "type": "Optional[Hash]"
+    },
+    "par_working_directory": {
+      "description": "Working directory for ansible-playbook execution",
+      "type": "Optional[String]"
+    },
+    "par_extra_flags": {
+      "description": "Additional flags to pass to ansible-playbook (e.g., ['-v', '--check'])",
+      "type": "Optional[Array[String]]"
+    }
+  },
+  "implementations": [
+    {
+      "name": "loki.sh",
+      "requirements": [
+        "shell"
+      ],
+      "input_method": "environment"
+    },
+    {
+      "name": "loki.ps1",
+      "requirements": [
+        "powershell"
+      ],
+      "input_method": "environment"
+    }
+  ]
+}

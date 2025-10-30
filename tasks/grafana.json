@@ -1,0 +1,176 @@
+{
+  "puppet_task_version": 1,
+  "supports_noop": false,
+  "description": "Execute the entire Ansible role imperatively",
+  "input_method": "environment",
+  "parameters": {
+    "k": {
+      "description": "",
+      "type": "Optional[String]"
+    },
+    "v": {
+      "description": "",
+      "type": "Optional[String]"
+    },
+    "section": {
+      "description": "",
+      "type": "Optional[String]"
+    },
+    "sub_key": {
+      "description": "",
+      "type": "Optional[String]"
+    },
+    "sub_value": {
+      "description": "",
+      "type": "Optional[String]"
+    },
+    "grafana_version": {
+      "description": "Ansible role variable (default: latest)",
+      "type": "Optional[String]"
+    },
+    "grafana_manage_repo": {
+      "description": "Ansible role variable (default: true)",
+      "type": "Optional[Boolean]"
+    },
+    "grafana_yum_repo": {
+      "description": "Ansible role variable (default: https://rpm.grafana.com)",
+      "type": "Optional[String]"
+    },
+    "grafana_yum_key": {
+      "description": "Ansible role variable (default: https://rpm.grafana.com/gpg.key)",
+      "type": "Optional[String]"
+    },
+    "grafana_rhsm_subscription": {
+      "description": "Ansible role variable (default: )",
+      "type": "Optional[String]"
+    },
+    "grafana_rhsm_repo": {
+      "description": "Ansible role variable (default: )",
+      "type": "Optional[String]"
+    },
+    "grafana_apt_release_channel": {
+      "description": "Ansible role variable (default: stable)",
+      "type": "Optional[String]"
+    },
+    "grafana_apt_arch": {
+      "description": "Ansible role variable (default: {{ 'arm64' if ansible_facts['architecture'] == 'aarch64' else 'amd64' }})",
+      "type": "Optional[String]"
+    },
+    "grafana_apt_repo_uri": {
+      "description": "Ansible role variable (default: https://apt.grafana.com/)",
+      "type": "Optional[String]"
+    },
+    "grafana_apt_repo": {
+      "description": "Ansible role variable (default: deb [arch={{ grafana_apt_arch }} signed-by=/usr/share/keyrings/grafana.asc] {{ grafana_apt_repo_uri }} {{ grafana_apt_release_channel }} main)",
+      "type": "Optional[String]"
+    },
+    "grafana_apt_key": {
+      "description": "Ansible role variable (default: https://apt.grafana.com/gpg.key)",
+      "type": "Optional[String]"
+    },
+    "grafana_apt_name": {
+      "description": "Ansible role variable (default: grafana)",
+      "type": "Optional[String]"
+    },
+    "grafana_use_provisioning": {
+      "description": "Should we use the provisioning capability when possible (provisioning require grafana >= 5.0)",
+      "type": "Optional[Boolean]"
+    },
+    "grafana_provisioning_synced": {
+      "description": "Should the provisioning be kept synced. If true, previous provisioned objects will be removed if not referenced anymore.",
+      "type": "Optional[Boolean]"
+    },
+    "grafana_provisioning_dashboards_from_file_structure": {
+      "description": "Should we provision dashboards by following the files structure. This sets the foldersFromFilesStructure option",
+      "type": "Optional[Boolean]"
+    },
+    "grafana_cap_net_bind_service": {
+      "description": "Get informed by reading: http://man7.org/linux/man-pages/man7/capabilities.7.html",
+      "type": "Optional[Boolean]"
+    },
+    "grafana_ini_default": {
+      "description": "Ansible role variable (default: {\"instance_name\"=>\"{{ ansible_facts['fqdn'] | default(ansible_host) | default(inventory_hostname) }}\", \"paths\"=>{\"logs\"=>\"/var/log/grafana\", \"data\"=>\"/var/lib/grafana\"}, \"server\"=>{\"http_addr\"=>\"0.0.0.0\", \"http_port\"=>3000, \"domain\"=>\"{{ ansible_facts['fqdn'] | default(ansible_host) | default('localhost') }}\", \"protocol\"=>\"http\", \"enforce_domain\"=>false, \"socket\"=>\"\", \"cert_key\"=>\"\", \"cert_file\"=>\"\", \"enable_gzip\"=>false, \"static_root_path\"=>\"public\", \"router_logging\"=>false, \"serve_from_sub_path\"=>false}, \"security\"=>{\"admin_user\"=>\"admin\", \"admin_password\"=>\"\"}, \"database\"=>{\"type\"=>\"sqlite3\"}, \"users\"=>{\"allow_sign_up\"=>false, \"auto_assign_org_role\"=>\"Viewer\", \"default_theme\"=>\"dark\"}, \"auth\"=>{}})",
+      "type": "Optional[Hash]"
+    },
+    "grafana_api_url": {
+      "description": "Ansible role variable (default: {{ grafana_ini.server.root_url }})",
+      "type": "Optional[String]"
+    },
+    "grafana_ldap": {
+      "description": "Ansible role variable (default: {})",
+      "type": "Optional[Hash]"
+    },
+    "grafana_plugins": {
+      "description": "Plugins to install from https://grafana.com/plugins",
+      "type": "Optional[Array]"
+    },
+    "grafana_dashboards": {
+      "description": "Dashboards from https://grafana.com/dashboards",
+      "type": "Optional[Array]"
+    },
+    "grafana_dashboards_dir": {
+      "description": "Ansible role variable (default: dashboards)",
+      "type": "Optional[String]"
+    },
+    "grafana_alert_notifications": {
+      "description": "Alert notification channels to configure",
+      "type": "Optional[Array]"
+    },
+    "grafana_alert_resources": {
+      "description": "Alert resources channels to configure",
+      "type": "Optional[Hash]"
+    },
+    "grafana_datasources": {
+      "description": "Datasources to configure",
+      "type": "Optional[Array]"
+    },
+    "grafana_api_keys": {
+      "description": "API keys to configure",
+      "type": "Optional[Array]"
+    },
+    "grafana_api_keys_dir": {
+      "description": "The location where the keys should be stored.",
+      "type": "Optional[String]"
+    },
+    "grafana_environment": {
+      "description": "Ansible role variable (default: {})",
+      "type": "Optional[Hash]"
+    },
+    "par_connection": {
+      "description": "Ansible connection type (e.g., 'local', 'ssh', 'winrm')",
+      "type": "Optional[String]"
+    },
+    "par_timeout": {
+      "description": "Playbook execution timeout in seconds",
+      "type": "Optional[Integer]"
+    },
+    "par_environment": {
+      "description": "Additional environment variables for ansible-playbook",
+      "type": "Optional[Hash]"
+    },
+    "par_working_directory": {
+      "description": "Working directory for ansible-playbook execution",
+      "type": "Optional[String]"
+    },
+    "par_extra_flags": {
+      "description": "Additional flags to pass to ansible-playbook (e.g., ['-v', '--check'])",
+      "type": "Optional[Array[String]]"
+    }
+  },
+  "implementations": [
+    {
+      "name": "grafana.sh",
+      "requirements": [
+        "shell"
+      ],
+      "input_method": "environment"
+    },
+    {
+      "name": "grafana.ps1",
+      "requirements": [
+        "powershell"
+      ],
+      "input_method": "environment"
+    }
+  ]
+}

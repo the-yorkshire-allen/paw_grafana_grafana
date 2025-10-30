@@ -1,0 +1,176 @@
+{
+  "puppet_task_version": 1,
+  "supports_noop": false,
+  "description": "Execute the entire Ansible role imperatively",
+  "input_method": "environment",
+  "parameters": {
+    "grafana_agent_mode": {
+      "description": "Docs: https://grafana.com/docs/agent/latest/flow/",
+      "type": "Optional[String]"
+    },
+    "key": {
+      "description": "",
+      "type": "Optional[String]"
+    },
+    "value": {
+      "description": "",
+      "type": "Optional[String]"
+    },
+    "grafana_agent_user": {
+      "description": "os user to create for the agent to run as",
+      "type": "Optional[String]"
+    },
+    "grafana_agent_user_group": {
+      "description": "os user group to create for the agent",
+      "type": "Optional[String]"
+    },
+    "grafana_agent_data_dir": {
+      "description": "data directory to create for the wal and positions",
+      "type": "Optional[String]"
+    },
+    "grafana_agent_config_dir": {
+      "description": "directory to store the configuration files in",
+      "type": "Optional[String]"
+    },
+    "grafana_agent_env_file": {
+      "description": "name of the environment file loaded by the system unit file",
+      "type": "Optional[String]"
+    },
+    "grafana_agent_install_dir": {
+      "description": "directory to install the binary to",
+      "type": "Optional[String]"
+    },
+    "grafana_agent_binary": {
+      "description": "name to use for the binary",
+      "type": "Optional[String]"
+    },
+    "flag": {
+      "description": "",
+      "type": "Optional[String]"
+    },
+    "flag_value": {
+      "description": "",
+      "type": "Optional[String]"
+    },
+    "flag_value_item": {
+      "description": "",
+      "type": "Optional[String]"
+    },
+    "grafana_agent_config_filename": {
+      "description": "name of the configuration file for the agent",
+      "type": "Optional[String]"
+    },
+    "grafana_agent_positions_dir": {
+      "description": "positions directory to use, should be a sub-folder of grafana_agent_data_dir, will automatically be created when the agent starts",
+      "type": "Optional[String]"
+    },
+    "grafana_agent_wal_dir": {
+      "description": "wal directory to use, should be a sub-folder of grafana_agent_data_dir, will automatically be created when the agent starts",
+      "type": "Optional[String]"
+    },
+    "grafana_agent_version": {
+      "description": "version of the agent to install",
+      "type": "Optional[String]"
+    },
+    "grafana_agent_base_download_url": {
+      "description": "base download url. Github or mirror to download from",
+      "type": "Optional[String]"
+    },
+    "grafana_agent_service_extra": {
+      "description": "dictionary of additional custom settings for the systemd service file",
+      "type": "Optional[Hash]"
+    },
+    "grafana_agent_local_tmp_dir": {
+      "description": "temporary directory to create on the controller/localhost where the archive will be downloaded to",
+      "type": "Optional[String]"
+    },
+    "grafana_agent_user_groups": {
+      "description": "(See https://github.com/grafana/grafana-ansible-collection/issues/40)",
+      "type": "Optional[Array]"
+    },
+    "grafana_agent_user_shell": {
+      "description": "the shell for the user",
+      "type": "Optional[String]"
+    },
+    "grafana_agent_user_createhome": {
+      "description": "whether or not to create a home directory for the user",
+      "type": "Optional[Boolean]"
+    },
+    "grafana_agent_local_binary_file": {
+      "description": "manually downloaded the binary",
+      "type": "Optional[String]"
+    },
+    "grafana_agent_flags_extra": {
+      "description": "Docs: https://grafana.com/docs/agent/latest/static/configuration/flags/",
+      "type": "Optional[Hash]"
+    },
+    "grafana_agent_env_vars": {
+      "description": "sets Environment variables in the systemd service configuration.",
+      "type": "Optional[Hash]"
+    },
+    "grafana_agent_env_file_vars": {
+      "description": "be aware of boolean values, when output they will result in the proper-cased string \"True\" and \"False\"",
+      "type": "Optional[Hash]"
+    },
+    "grafana_agent_provisioned_config_file": {
+      "description": "path to a config file on the controller that will be used instead of the provided configs below if specified.",
+      "type": "Optional[String]"
+    },
+    "grafana_agent_server_config": {
+      "description": "the entire dictionary value for this object is copied to the server: block in the config file",
+      "type": "Optional[Hash]"
+    },
+    "grafana_agent_metrics_config": {
+      "description": "the entire dictionary value for this object is copied to the metrics: block in the config file",
+      "type": "Optional[Hash]"
+    },
+    "grafana_agent_logs_config": {
+      "description": "the entire dictionary value for this object is copied to the logs: block in the config file",
+      "type": "Optional[Hash]"
+    },
+    "grafana_agent_traces_config": {
+      "description": "the entire dictionary value for this object is copied to the traces: block in the config file",
+      "type": "Optional[Hash]"
+    },
+    "grafana_agent_integrations_config": {
+      "description": "the entire dictionary value for this object is copied to the integrations: block in the config file",
+      "type": "Optional[Hash]"
+    },
+    "par_connection": {
+      "description": "Ansible connection type (e.g., 'local', 'ssh', 'winrm')",
+      "type": "Optional[String]"
+    },
+    "par_timeout": {
+      "description": "Playbook execution timeout in seconds",
+      "type": "Optional[Integer]"
+    },
+    "par_environment": {
+      "description": "Additional environment variables for ansible-playbook",
+      "type": "Optional[Hash]"
+    },
+    "par_working_directory": {
+      "description": "Working directory for ansible-playbook execution",
+      "type": "Optional[String]"
+    },
+    "par_extra_flags": {
+      "description": "Additional flags to pass to ansible-playbook (e.g., ['-v', '--check'])",
+      "type": "Optional[Array[String]]"
+    }
+  },
+  "implementations": [
+    {
+      "name": "grafana_agent.sh",
+      "requirements": [
+        "shell"
+      ],
+      "input_method": "environment"
+    },
+    {
+      "name": "grafana_agent.ps1",
+      "requirements": [
+        "powershell"
+      ],
+      "input_method": "environment"
+    }
+  ]
+}

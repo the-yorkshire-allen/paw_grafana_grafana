@@ -1,0 +1,9 @@
+---
+- name: Execute grafana_agent role
+  hosts: localhost
+  connection: local
+  gather_facts: true
+  roles:
+  - role: "."
+    tags:
+    - all

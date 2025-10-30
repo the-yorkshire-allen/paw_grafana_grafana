@@ -1,0 +1,116 @@
+{
+  "puppet_task_version": 1,
+  "supports_noop": false,
+  "description": "Execute the entire Ansible role imperatively",
+  "input_method": "environment",
+  "parameters": {
+    "flag": {
+      "description": "",
+      "type": "Optional[String]"
+    },
+    "each_dir": {
+      "description": "",
+      "type": "Optional[String]"
+    },
+    "each_log": {
+      "description": "",
+      "type": "Optional[String]"
+    },
+    "promtail_version": {
+      "description": "defaults file for promtail",
+      "type": "Optional[String]"
+    },
+    "promtail_uninstall": {
+      "description": "",
+      "type": "Optional[Boolean]"
+    },
+    "promtail_http_listen_port": {
+      "description": "Ansible role variable (default: 9080)",
+      "type": "Optional[Integer]"
+    },
+    "promtail_http_listen_address": {
+      "description": "Ansible role variable (default: 0.0.0.0)",
+      "type": "Optional[String]"
+    },
+    "promtail_expose_port": {
+      "description": "",
+      "type": "Optional[Boolean]"
+    },
+    "promtail_positions_path": {
+      "description": "Ansible role variable (default: /var/lib/promtail)",
+      "type": "Optional[String]"
+    },
+    "promtail_runtime_mode": {
+      "description": "Ansible role variable (default: acl)",
+      "type": "Optional[String]"
+    },
+    "promtail_extra_flags": {
+      "description": "Ansible role variable (default: [])",
+      "type": "Optional[Array]"
+    },
+    "promtail_user_append_groups": {
+      "description": "Ansible role variable (default: [\"systemd-journal\"])",
+      "type": "Optional[Array]"
+    },
+    "promtail_download_url_rpm": {
+      "description": "Ansible role variable (default: https://github.com/grafana/loki/releases/download/v{{ promtail_version }}/promtail-{{ promtail_version }}.{{ __promtail_arch }}.rpm)",
+      "type": "Optional[String]"
+    },
+    "promtail_download_url_deb": {
+      "description": "Ansible role variable (default: https://github.com/grafana/loki/releases/download/v{{ promtail_version }}/promtail_{{ promtail_version }}_{{ __promtail_arch }}.deb)",
+      "type": "Optional[String]"
+    },
+    "promtail_server": {
+      "description": "default variables for /etc/promtail/config.yml",
+      "type": "Optional[Hash]"
+    },
+    "promtail_positions": {
+      "description": "Ansible role variable (default: {\"filename\"=>\"{{ promtail_positions_path }}/positions.yaml\"})",
+      "type": "Optional[Hash]"
+    },
+    "promtail_clients": {
+      "description": "Ansible role variable (default: [])",
+      "type": "Optional[Array]"
+    },
+    "promtail_scrape_configs": {
+      "description": "Ansible role variable (default: [])",
+      "type": "Optional[Array]"
+    },
+    "par_connection": {
+      "description": "Ansible connection type (e.g., 'local', 'ssh', 'winrm')",
+      "type": "Optional[String]"
+    },
+    "par_timeout": {
+      "description": "Playbook execution timeout in seconds",
+      "type": "Optional[Integer]"
+    },
+    "par_environment": {
+      "description": "Additional environment variables for ansible-playbook",
+      "type": "Optional[Hash]"
+    },
+    "par_working_directory": {
+      "description": "Working directory for ansible-playbook execution",
+      "type": "Optional[String]"
+    },
+    "par_extra_flags": {
+      "description": "Additional flags to pass to ansible-playbook (e.g., ['-v', '--check'])",
+      "type": "Optional[Array[String]]"
+    }
+  },
+  "implementations": [
+    {
+      "name": "promtail.sh",
+      "requirements": [
+        "shell"
+      ],
+      "input_method": "environment"
+    },
+    {
+      "name": "promtail.ps1",
+      "requirements": [
+        "powershell"
+      ],
+      "input_method": "environment"
+    }
+  ]
+}

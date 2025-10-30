@@ -1,0 +1,124 @@
+{
+  "puppet_task_version": 1,
+  "supports_noop": false,
+  "description": "Execute the entire Ansible role imperatively",
+  "input_method": "environment",
+  "parameters": {
+    "otel_collector_installation_dir": {
+      "description": "Ansible role variable (default: /etc/otel-collector)",
+      "type": "Optional[String]"
+    },
+    "otel_collector_executable": {
+      "description": "Ansible role variable (default: {% if otel_collector_type == 'contrib' %}otelcol-contrib{% else %}otelcol{% endif %})",
+      "type": "Optional[String]"
+    },
+    "otel_collector_config_dir": {
+      "description": "Ansible role variable (default: /etc/otel-collector)",
+      "type": "Optional[String]"
+    },
+    "otel_collector_config_file": {
+      "description": "Ansible role variable (default: config.yaml)",
+      "type": "Optional[String]"
+    },
+    "otel_collector_service_user": {
+      "description": "Ansible role variable (default: otel)",
+      "type": "Optional[String]"
+    },
+    "otel_collector_service_group": {
+      "description": "Ansible role variable (default: otel)",
+      "type": "Optional[String]"
+    },
+    "otel_collector_service_statedirectory": {
+      "description": "Ansible role variable (default: otel-collector)",
+      "type": "Optional[String]"
+    },
+    "otel_collector_version": {
+      "description": "Ansible role variable (default: 0.90.1)",
+      "type": "Optional[String]"
+    },
+    "otel_collector_binary_url": {
+      "description": "Ansible role variable (default: https://github.com/open-telemetry/opentelemetry-collector-releases/releases/download/v{{ otel_collector_version }}/{% if otel_collector_type == 'contrib' %}otelcol-contrib_{{ otel_collector_version }}_linux_{{ otel_collector_arch }}{% else %}otelcol_{{ otel_collector_version }}_linux_{{ otel_collector_arch }}{% endif %}.tar.gz)",
+      "type": "Optional[String]"
+    },
+    "otel_collector_latest_url": {
+      "description": "Ansible role variable (default: https://api.github.com/repos/open-telemetry/opentelemetry-collector-releases/releases/latest)",
+      "type": "Optional[String]"
+    },
+    "arch_mapping": {
+      "description": "Ansible role variable (default: {\"x86_64\"=>\"amd64\", \"aarch64\"=>\"arm64\", \"armv7l\"=>\"armhf\", \"i386\"=>\"i386\", \"ppc64le\"=>\"ppc64le\"})",
+      "type": "Optional[Hash]"
+    },
+    "otel_collector_arch": {
+      "description": "Ansible role variable (default: {{ arch_mapping[ansible_facts['architecture']] | default('amd64') }})",
+      "type": "Optional[String]"
+    },
+    "otel_collector_service_name": {
+      "description": "Ansible role variable (default: otel-collector)",
+      "type": "Optional[String]"
+    },
+    "otel_collector_type": {
+      "description": "Ansible role variable (default: contrib)",
+      "type": "Optional[String]"
+    },
+    "otel_collector_receivers": {
+      "description": "Ansible role variable (default: )",
+      "type": "Optional[String]"
+    },
+    "otel_collector_exporters": {
+      "description": "Ansible role variable (default: )",
+      "type": "Optional[String]"
+    },
+    "otel_collector_processors": {
+      "description": "Ansible role variable (default: )",
+      "type": "Optional[String]"
+    },
+    "otel_collector_extensions": {
+      "description": "Ansible role variable (default: )",
+      "type": "Optional[String]"
+    },
+    "otel_collector_service": {
+      "description": "Ansible role variable (default: )",
+      "type": "Optional[String]"
+    },
+    "otel_collector_connectors": {
+      "description": "Ansible role variable (default: )",
+      "type": "Optional[String]"
+    },
+    "par_connection": {
+      "description": "Ansible connection type (e.g., 'local', 'ssh', 'winrm')",
+      "type": "Optional[String]"
+    },
+    "par_timeout": {
+      "description": "Playbook execution timeout in seconds",
+      "type": "Optional[Integer]"
+    },
+    "par_environment": {
+      "description": "Additional environment variables for ansible-playbook",
+      "type": "Optional[Hash]"
+    },
+    "par_working_directory": {
+      "description": "Working directory for ansible-playbook execution",
+      "type": "Optional[String]"
+    },
+    "par_extra_flags": {
+      "description": "Additional flags to pass to ansible-playbook (e.g., ['-v', '--check'])",
+      "type": "Optional[Array[String]]"
+    }
+  },
+  "implementations": [
+    {
+      "name": "opentelemetry_collector.sh",
+      "requirements": [
+        "shell"
+      ],
+      "input_method": "environment"
+    },
+    {
+      "name": "opentelemetry_collector.ps1",
+      "requirements": [
+        "powershell"
+      ],
+      "input_method": "environment"
+    }
+  ]
+}

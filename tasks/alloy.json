@@ -1,0 +1,100 @@
+{
+  "puppet_task_version": 1,
+  "supports_noop": false,
+  "description": "Execute the entire Ansible role imperatively",
+  "input_method": "environment",
+  "parameters": {
+    "key": {
+      "description": "",
+      "type": "Optional[String]"
+    },
+    "value": {
+      "description": "",
+      "type": "Optional[String]"
+    },
+    "alloy_config": {
+      "description": "Ansible role variable (default: {})",
+      "type": "Optional[Hash]"
+    },
+    "alloy_systemd_override": {
+      "description": "Ansible role variable (default: {})",
+      "type": "Optional[Hash]"
+    },
+    "alloy_version": {
+      "description": "defaults file for alloy",
+      "type": "Optional[String]"
+    },
+    "alloy_uninstall": {
+      "description": "",
+      "type": "Optional[Boolean]"
+    },
+    "alloy_expose_port": {
+      "description": "",
+      "type": "Optional[Boolean]"
+    },
+    "alloy_github_api_url": {
+      "description": "Ansible role variable (default: https://api.github.com/repos/grafana/alloy/releases/latest)",
+      "type": "Optional[String]"
+    },
+    "alloy_download_url_rpm": {
+      "description": "Ansible role variable (default: https://github.com/grafana/alloy/releases/download/v{{ alloy_version }}/alloy-{{ alloy_version }}-1.{{ __alloy_arch }}.rpm)",
+      "type": "Optional[String]"
+    },
+    "alloy_download_url_deb": {
+      "description": "Ansible role variable (default: https://github.com/grafana/alloy/releases/download/v{{ alloy_version }}/alloy-{{ alloy_version }}-1.{{ __alloy_arch }}.deb)",
+      "type": "Optional[String]"
+    },
+    "alloy_readiness_check_use_https": {
+      "description": "",
+      "type": "Optional[Boolean]"
+    },
+    "alloy_readiness_check_use_proxy": {
+      "description": "Ansible role variable (default: true)",
+      "type": "Optional[Boolean]"
+    },
+    "alloy_user_groups": {
+      "description": "Ansible role variable (default: [])",
+      "type": "Optional[Array]"
+    },
+    "alloy_env_file_vars": {
+      "description": "Ansible role variable (default: {})",
+      "type": "Optional[Hash]"
+    },
+    "par_connection": {
+      "description": "Ansible connection type (e.g., 'local', 'ssh', 'winrm')",
+      "type": "Optional[String]"
+    },
+    "par_timeout": {
+      "description": "Playbook execution timeout in seconds",
+      "type": "Optional[Integer]"
+    },
+    "par_environment": {
+      "description": "Additional environment variables for ansible-playbook",
+      "type": "Optional[Hash]"
+    },
+    "par_working_directory": {
+      "description": "Working directory for ansible-playbook execution",
+      "type": "Optional[String]"
+    },
+    "par_extra_flags": {
+      "description": "Additional flags to pass to ansible-playbook (e.g., ['-v', '--check'])",
+      "type": "Optional[Array[String]]"
+    }
+  },
+  "implementations": [
+    {
+      "name": "alloy.sh",
+      "requirements": [
+        "shell"
+      ],
+      "input_method": "environment"
+    },
+    {
+      "name": "alloy.ps1",
+      "requirements": [
+        "powershell"
+      ],
+      "input_method": "environment"
+    }
+  ]
+}

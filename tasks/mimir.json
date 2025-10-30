@@ -1,0 +1,96 @@
+{
+  "puppet_task_version": 1,
+  "supports_noop": false,
+  "description": "Execute the entire Ansible role imperatively",
+  "input_method": "environment",
+  "parameters": {
+    "mimir_version": {
+      "description": "defaults file for mimir",
+      "type": "Optional[String]"
+    },
+    "mimir_uninstall": {
+      "description": "",
+      "type": "Optional[Boolean]"
+    },
+    "du__mimir_arch": {
+      "description": "Ansible role variable (default: {{ arch_mapping[ansible_facts['architecture']] | default('amd64') }})",
+      "type": "Optional[String]"
+    },
+    "mimir_download_url_rpm": {
+      "description": "Ansible role variable (default: https://github.com/grafana/mimir/releases/download/mimir-{{ mimir_version }}/mimir-{{ mimir_version }}_{{ __mimir_arch }}.rpm)",
+      "type": "Optional[String]"
+    },
+    "mimir_download_url_deb": {
+      "description": "Ansible role variable (default: https://github.com/grafana/mimir/releases/download/mimir-{{ mimir_version }}/mimir-{{ mimir_version }}_{{ __mimir_arch }}.deb)",
+      "type": "Optional[String]"
+    },
+    "mimir_working_path": {
+      "description": "Ansible role variable (default: /var/lib/mimir)",
+      "type": "Optional[String]"
+    },
+    "mimir_ruler_alert_path": {
+      "description": "Ansible role variable (default: {{ mimir_working_path }}/ruler)",
+      "type": "Optional[String]"
+    },
+    "mimir_http_listen_port": {
+      "description": "Ansible role variable (default: 8080)",
+      "type": "Optional[Integer]"
+    },
+    "mimir_http_listen_address": {
+      "description": "Ansible role variable (default: 0.0.0.0)",
+      "type": "Optional[String]"
+    },
+    "arch_mapping": {
+      "description": "Ansible role variable (default: {\"x86_64\"=>\"amd64\", \"aarch64\"=>\"arm64\", \"armv7l\"=>\"armhf\", \"i386\"=>\"i386\", \"ppc64le\"=>\"ppc64le\"})",
+      "type": "Optional[Hash]"
+    },
+    "mimir_server": {
+      "description": "Ansible role variable (default: {\"http_listen_port\"=>\"{{ mimir_http_listen_port }}\", \"http_listen_address\"=>\"{{ mimir_http_listen_address }}\"})",
+      "type": "Optional[Hash]"
+    },
+    "mimir_ruler": {
+      "description": "Ansible role variable (default: {\"rule_path\"=>\"{{ mimir_working_path }}/ruler\", \"alertmanager_url\"=>\"http://localhost:{{ mimir_http_listen_port }}/alertmanager\"})",
+      "type": "Optional[Hash]"
+    },
+    "mimir_alertmanager": {
+      "description": "Ansible role variable (default: {\"data_dir\"=>\"{{ mimir_working_path }}/alertmanager\", \"external_url\"=>\"http://localhost:{{ mimir_http_listen_port }}/alertmanager\"})",
+      "type": "Optional[Hash]"
+    },
+    "par_connection": {
+      "description": "Ansible connection type (e.g., 'local', 'ssh', 'winrm')",
+      "type": "Optional[String]"
+    },
+    "par_timeout": {
+      "description": "Playbook execution timeout in seconds",
+      "type": "Optional[Integer]"
+    },
+    "par_environment": {
+      "description": "Additional environment variables for ansible-playbook",
+      "type": "Optional[Hash]"
+    },
+    "par_working_directory": {
+      "description": "Working directory for ansible-playbook execution",
+      "type": "Optional[String]"
+    },
+    "par_extra_flags": {
+      "description": "Additional flags to pass to ansible-playbook (e.g., ['-v', '--check'])",
+      "type": "Optional[Array[String]]"
+    }
+  },
+  "implementations": [
+    {
+      "name": "mimir.sh",
+      "requirements": [
+        "shell"
+      ],
+      "input_method": "environment"
+    },
+    {
+      "name": "mimir.ps1",
+      "requirements": [
+        "powershell"
+      ],
+      "input_method": "environment"
+    }
+  ]
+}
